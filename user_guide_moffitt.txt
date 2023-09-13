@@ -1,0 +1,38 @@
+First, download the python codes:
+git clone https://github.com/QibingJiang/cell_process_moffitt_py_2023.git
+
+Second, run the following command,
+cd cell_process_moffitt_py
+
+First, there are some package need to be installed:
+pip install opencv_python
+pip install scipy
+pip install astropy
+pip install shutil
+
+Now, you can run the python codes:
+python3 ./cell_process.py configure.txt input_dir
+input_dir is the directory where the images are. For example, 
+python3 ./cell_process.py configure.txt /home/qibing/disk_t/Pt204/RawData/Beacon-2
+
+#############################################################################
+You do not need to specify output directory. The result would be put into the TimeLapseVideos_cbb folder under each patient folder. For example: "/home/qibing/disk_t/Pt204/TimeLapseVideos/"
+
+In the TimeLapseVideos_cbb folder, 
+
+1. Results contains files Results_*.csv, each of which is the live cell area for one Beacon. 
+
+2. In the video, the cells in blue circles are live, and yellow for dead. 
+
+3. Cell_tracks contains other information. The file named Beacon_*_cell_tracks.txt contains the information for each cell track. In this file, each row represents one image (one time point). the 5 columns are track-id, x-coordinate, y-coordinate, cell area, cell core brightness average, eccentricity. The coordinates origin is at the top left corner of the image. Image size is 1328(width)x1048(height). x-coordinate is horizontaly, and always positive. y-coordinate is vertically, and always positive. 
+
+4. In the file named Beacon_*_live_dead_table.txt, each row represents one image (one time point). The 4 columns are the number of live cells, the number of dead cells, the area sum of live cells, the area sum of dead cells.
+
+#############################################################################
+If you want to compile the python codes to executable file, then install the package:
+pip install pyinstaller
+
+Now you can run the command:
+pyinstaller ./cell_process.py
+
+The executable file is here ./dist/cell_process/cell_process
